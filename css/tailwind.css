@@ -4,10 +4,11 @@
 @source '../node_modules/pliny';
 @custom-variant dark (&:where(.dark, .dark *));
 
+
 /* Core theme configuration */
 @theme {
-  /* Font families */
-  --font-sans: var(--font-orbitron), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-work-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-orbitron: 'Orbitron', ui-sans-serif, system-ui, sans-serif;
 
   --color-primary-400: oklch(75% 0.22 265.44);
   --color-primary-500: oklch(65% 0.26 265.5); 
@@ -25,6 +26,8 @@
   --color-gray-800: oklch(0.278 0.033 256.848);
   --color-gray-900: oklch(0.21 0.034 264.665);
   --color-gray-950: oklch(0.13 0.028 261.692);
+
+
 
   /* Line heights */
   --line-height-11: 2.75rem;
@@ -53,6 +56,17 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+  }
+
+  body {
+    font-family: var(--font-work-sans);
+    letter-spacing: var(--tracking-wide);
+    font-weight: 500;
+  }
+  
+  h1, h2, h3, h4, h5, h6, a, footer {
+    font-family: var(--font-orbitron);
+    letter-spacing: var(--tracking-wider);
   }
 
   a,
