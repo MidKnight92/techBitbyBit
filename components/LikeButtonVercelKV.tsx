@@ -2,8 +2,8 @@
 import { useState, useEffect, useCallback } from 'react'
 
 export default function LikeButtonVercelKV({ slug }) {
-  const [likes, setLikes] = useState(10)
-  const [isLiked, setIsLiked] = useState(true)
+  const [likes, setLikes] = useState(0)
+  const [isLiked, setIsLiked] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const storageKey = `user_liked_${slug}`
 
@@ -61,7 +61,7 @@ export default function LikeButtonVercelKV({ slug }) {
       <button onClick={handleLike} disabled={isLiked}>
         {isLiked ? '💙 Liked' : '🩵 Like'}
       </button>
-      {likes && (
+      {likes > 0 && (
         <>
           <div>{` • `}</div>
           <div>{likes} Likes</div>
