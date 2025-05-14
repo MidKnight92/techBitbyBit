@@ -23,6 +23,8 @@ const siteMetadata = {
   // instagram: 'https://www.instagram.com',
   // medium: 'https://medium.com',
   // bluesky: 'https://bsky.app/',
+  // podcast: '',
+  buyMeACoffee: 'buymeacoffee.com/techbitbybit',
   locale: 'en-US',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
