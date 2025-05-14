@@ -15,17 +15,11 @@ const Header = () => {
   return (
     <header className={headerClass}>
       <Link href="/" aria-label={siteMetadata.headerTitle}>
-        <div className="flex items-center justify-between">
-          <div className="mr-3">
-            <Image src="/static/images/logo.png" alt="Logo" width={100} height={100} />
-          </div>
-          {typeof siteMetadata.headerTitle === 'string' ? (
-            <div className="hidden h-6 text-2xl font-semibold sm:block">
-              {siteMetadata.headerTitle}
-            </div>
-          ) : (
-            siteMetadata.headerTitle
-          )}
+        <div className="mr-3 hidden hover:brightness-175 active:brightness-135 md:block">
+          <Image src="/static/images/logo.png" alt="Logo" width={100} height={100} />
+        </div>
+        <div className="text-md mr-3 h-6 font-semibold sm:block md:hidden">
+          {siteMetadata.headerTitle}
         </div>
       </Link>
       <div className="flex items-center space-x-4 leading-5 sm:-mr-6 sm:space-x-6">

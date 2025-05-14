@@ -4213,6 +4213,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@upstash/redis@npm:^1.34.0":
+  version: 1.34.9
+  resolution: "@upstash/redis@npm:1.34.9"
+  dependencies:
+    crypto-js: ^4.2.0
+  checksum: 78ec0dc9dd3e573e43718546dd27fcf43c56dfe7fa23c565c54655067338e67edc2f9d8b1be4e7b2698792a272ffdae67d4f3f5c9ee3083e01c186791e475e16
+  languageName: node
+  linkType: hard
+
+"@vercel/kv@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@vercel/kv@npm:3.0.0"
+  dependencies:
+    "@upstash/redis": ^1.34.0
+  checksum: 5bebab15c770e32409c03054dbd58e3e5a4d77d1a813c91e6613a9382a96b391878b67a1e2fbe8f7e197899a2dc589212ee6f6b11ab272798954e63816c6eba1
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^3.0.0":
   version: 3.0.1
   resolution: "abbrev@npm:3.0.1"
@@ -5255,6 +5273,13 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 8d306efacaf6f3f60e0224c287664093fa9185680b2d195852ba9a863f85d02dcc737094c6e512175f8ee0161f9b87c73c6826034c2422e39de7d6569cf4503b
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "crypto-js@npm:4.2.0"
+  checksum: f051666dbc077c8324777f44fbd3aaea2986f198fe85092535130d17026c7c2ccf2d23ee5b29b36f7a4a07312db2fae23c9094b644cc35f7858b1b4fcaf27774
   languageName: node
   linkType: hard
 
@@ -12243,6 +12268,7 @@ __metadata:
     "@types/react": ^19.0.8
     "@typescript-eslint/eslint-plugin": ^8.12.0
     "@typescript-eslint/parser": ^8.12.0
+    "@vercel/kv": ^3.0.0
     body-scroll-lock: ^4.0.0-beta.0
     contentlayer2: 0.5.5
     cross-env: ^7.0.3
