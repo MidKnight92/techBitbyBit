@@ -104,7 +104,7 @@ export const Bits = defineDocumentType(() => ({
     authors: { type: 'list', of: { type: 'string' } },
     layout: { type: 'string' },
     bibliography: { type: 'string' },
-    canonicalUrl: { type: 'string' },
+    canonicalUrl: { type: 'string', required: true },
   },
   computedFields: {
     ...computedFields,
