@@ -124,6 +124,30 @@ export const Bits = defineDocumentType(() => ({
   },
 }))
 
+export const About = defineDocumentType(() => ({
+  name: 'About',
+  filePathPattern: 'about/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    images: { type: 'json' },
+    layout: { type: 'string' },
+  },
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -149,7 +173,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Bits, Authors],
+  documentTypes: [Bits, Authors, About],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

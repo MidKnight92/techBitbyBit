@@ -23,8 +23,8 @@ export async function generateMetadata(props: {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
   const post = allBits.find((p) => p.slug === slug)
-  const authorList = post?.authors || ['default']
-  const authorDetails = authorList.map((author) => {
+  const authorList = post!.authors // || ['default']
+  const authorDetails = authorList!.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
     return coreContent(authorResults as Authors)
   })
@@ -35,6 +35,7 @@ export async function generateMetadata(props: {
   const publishedAt = new Date(post.date).toISOString()
   const modifiedAt = new Date(post.lastmod || post.date).toISOString()
   const authors = authorDetails.map((author) => author.name)
+  console.log('AUTHORS 38', authors)
   let imageList = [siteMetadata.socialBanner]
   if (post.images) {
     imageList = typeof post.images === 'string' ? [post.images] : post.images
@@ -44,7 +45,7 @@ export async function generateMetadata(props: {
       url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
     }
   })
-
+  console.log('[siteMetadata.author]', siteMetadata.author)
   return {
     title: post.title,
     description: post.summary,
@@ -80,11 +81,17 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
   const post = allBits.find((p) => p.slug === slug) as Bits
-  const authorList = post?.authors || ['default']
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
+  const authorList = post?.authors // || ['default']
+  const authorDetails = authorList!.map((author) => {
+    console.log('AUTHOR ==>', author)
+    const authorResults = allAuthors.find((p) => {
+      console.log('p slug', p.slug)
+      return p.slug === author
+    })
+    console.log('AUTHOR result ==>', authorResults)
     return coreContent(authorResults as Authors)
   })
+  // console.log(post)
   const mainContent = coreContent(post)
   const jsonLd = post.structuredData
   jsonLd['author'] = authorDetails.map((author) => {

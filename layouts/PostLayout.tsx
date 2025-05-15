@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Bits } from 'contentlayer/generated'
+import type { Authors, Bits } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
@@ -21,16 +21,16 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 
 interface LayoutProps {
   content: CoreContent<Bits>
-  // authorDetails: CoreContent<Authors>[]
+  authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
   children: ReactNode
 }
 
-export default function PostLayout({ content, next, prev, children }: LayoutProps) {
+export default function PostLayout({ authorDetails, content, next, prev, children }: LayoutProps) {
   const { filePath, path, slug, date, title, tags } = content
   const basePath = path.split('/')[0]
-
+  console.log('author details ===>', authorDetails)
   return (
     <SectionContainer>
       <ScrollTopAndComment />
@@ -56,7 +56,27 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700">
             <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
               <dt className="sr-only">Add</dt>
-              <dd>{/* <p>Add will go here</p> */}</dd>
+              <dd>
+                <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-y-8 xl:space-x-0">
+                  {authorDetails.map((author, idx) => (
+                    <li className="flex items-center space-x-2" key={`${author.name}-${idx}`}>
+                      {author.avatar && (
+                        <Image
+                          src={author.avatar}
+                          width={38}
+                          height={38}
+                          alt="avatar"
+                          className="h-10 w-10 rounded-full"
+                        />
+                      )}
+                      <dl className="text-sm leading-5 font-medium whitespace-nowrap">
+                        <dt className="sr-only">Name</dt>
+                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
+                      </dl>
+                    </li>
+                  ))}
+                </ul>
+              </dd>
             </dl>
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
               <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
@@ -83,7 +103,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                     {prev && prev.path && (
                       <div>
                         <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                          Previous Article
+                          Previous Bit
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                           <Link href={`/${prev.path}`}>{prev.title}</Link>
@@ -93,7 +113,7 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                     {next && next.path && (
                       <div>
                         <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                          Next Article
+                          Next Bit
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                           <Link href={`/${next.path}`}>{next.title}</Link>
@@ -107,9 +127,9 @@ export default function PostLayout({ content, next, prev, children }: LayoutProp
                 <Link
                   href={`/${basePath}`}
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label="Back to the blog"
+                  aria-label="Back to the bits"
                 >
-                  &larr; Back to the blog
+                  &larr; Back to the bits
                 </Link>
               </div>
             </footer>
