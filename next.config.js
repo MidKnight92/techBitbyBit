@@ -6,16 +6,18 @@ const withBundleAnalyzer = withBundleAnalyzerFactory({
   enabled: process.env.ANALYZE === 'true',
 })
 
-// You might need to insert additional domains in script-src if you are using external services
+const isDev = process.env.NODE_ENV !== 'production'
+
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' giscus.app analytics.umami.is https://cusdis.com;
-  style-src 'self' 'unsafe-inline' https://cusdis.com;
+  script-src 'self' 'unsafe-inline' giscus.app analytics.umami.is https://cusdis.com${isDev ? " 'unsafe-eval'" : ''};
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cusdis.com;
   img-src * blob: data:;
   media-src *.s3.amazonaws.com;
-  connect-src *;
-  font-src 'self';
+  connect-src 'self' https://cusdis.com;
+  font-src 'self' https://fonts.gstatic.com;
   frame-src giscus.app cusdis.com;
+  manifest-src 'self';
 `
 
 const securityHeaders = [
@@ -74,6 +76,7 @@ export default () => {
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
     eslint: {
       dirs: ['app', 'components', 'layouts', 'scripts'],
+      // ignoreDuringBuilds: true,
     },
     images: {
       remotePatterns: [
@@ -92,7 +95,10 @@ export default () => {
         },
       ]
     },
-    webpack: (config) => {
+    webpack: (config, { dev }) => {
+      if (!dev) {
+        config.devtool = false
+      }
       config.module.rules.push({
         test: /\.svg$/,
         issuer: {

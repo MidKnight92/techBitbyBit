@@ -1,3 +1,5 @@
+import Script from 'next/script'
+
 export default function Comments({
   slug,
   title,
@@ -9,6 +11,8 @@ export default function Comments({
 }) {
   return (
     <>
+      <Script async defer src="https://cusdis.com/js/cusdis.es.js" strategy="afterInteractive" />
+
       <p>Comments</p>
       <div
         id="cusdis_thread"
