@@ -11,9 +11,9 @@ const outputFolder = process.env.EXPORT ? 'out' : 'public'
 
 const generateRssItem = (config, post) => `
   <item>
-    <guid>${config.siteUrl}/blog/${post.slug}</guid>
+    <guid>${config.siteUrl}/bits/${post.slug}</guid>
     <title>${escape(post.title)}</title>
-    <link>${config.siteUrl}/blog/${post.slug}</link>
+    <link>${config.siteUrl}/bits/${post.slug}</link>
     ${post.summary && `<description>${escape(post.summary)}</description>`}
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <author>${config.email} (${config.author})</author>
@@ -25,7 +25,7 @@ const generateRss = (config, posts, page = 'feed.xml') => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${escape(config.title)}</title>
-      <link>${config.siteUrl}/blog</link>
+      <link>${config.siteUrl}/bits</link>
       <description>${escape(config.description)}</description>
       <language>${config.language}</language>
       <managingEditor>${config.email} (${config.author})</managingEditor>
@@ -39,7 +39,7 @@ const generateRss = (config, posts, page = 'feed.xml') => `
 
 async function generateRSS(config, allBits, page = 'feed.xml') {
   const publishPosts = allBits.filter((post) => post.draft !== true)
-  // RSS for blog post
+  // RSS for bits post
   if (publishPosts.length > 0) {
     const rss = generateRss(config, sortPosts(publishPosts))
     writeFileSync(`./${outputFolder}/${page}`, rss)

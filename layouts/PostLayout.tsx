@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Authors, Bits } from 'contentlayer/generated'
-import Link from '@/components/Link'
+import Link from 'next/link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import Image from '@/components/Image'
@@ -29,9 +29,8 @@ interface LayoutProps {
 }
 
 export default function PostLayout({ authorDetails, content, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, canonicalUrl } = content
+  const { filePath, path, slug, date, title, tags, canonicalUrl, authors } = content
   const basePath = path.split('/')[0]
-  console.log('author details ===>', authorDetails)
   return (
     <SectionContainer>
       <ScrollTopAndComment />
@@ -61,19 +60,23 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-y-8 xl:space-x-0">
                   {authorDetails.map((author, idx) => (
                     <li className="flex items-center space-x-2" key={`${author.name}-${idx}`}>
-                      {author.avatar && (
-                        <Image
-                          src={author.avatar}
-                          width={38}
-                          height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <dl className="text-sm leading-5 font-medium whitespace-nowrap">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                      </dl>
+                      <Link href={`/authors/${author.slug}`}>
+                        {author.avatar && (
+                          <Image
+                            src={author.avatar}
+                            width={38}
+                            height={38}
+                            alt="avatar"
+                            className="h-10 w-10 rounded-full"
+                          />
+                        )}
+                        <dl className="text-sm leading-5 font-light tracking-normal whitespace-nowrap">
+                          <dt className="sr-only">Name</dt>
+                          <dd className="hover:text-primary-500 dark:hover:text-primary-400 m-1 text-gray-900 dark:text-gray-100">
+                            {author.name}
+                          </dd>
+                        </dl>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -82,8 +85,8 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
               <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
               <div className="pt-6 pb-6 text-center text-sm text-gray-700 dark:text-gray-300">
-                <Comments slug={slug} title={title} url={canonicalUrl} />
                 <LikeButtonVercelKV slug={slug} />
+                <Comments slug={slug} title={title} url={canonicalUrl} />
               </div>
             </div>
             <footer>
