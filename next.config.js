@@ -9,13 +9,13 @@ const withBundleAnalyzer = withBundleAnalyzerFactory({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is;
-  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-inline' giscus.app analytics.umami.is https://cusdis.com;
+  style-src 'self' 'unsafe-inline' https://cusdis.com;
   img-src * blob: data:;
   media-src *.s3.amazonaws.com;
   connect-src *;
   font-src 'self';
-  frame-src giscus.app
+  frame-src giscus.app cusdis.com;
 `
 
 const securityHeaders = [
