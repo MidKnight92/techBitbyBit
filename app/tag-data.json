@@ -1,1 +1,26 @@
-{}
+{
+  "caching": 1,
+  "performance": 1,
+  "web-development": 1,
+  "tech-explained": 3,
+  "analogy": 3,
+  "databases": 1,
+  "containers": 1,
+  "software-development": 2,
+  "devops-basics": 1,
+  "docker": 1,
+  "bits": 1,
+  "binary": 1,
+  "fundamentals": 1,
+  "technology-explained": 1,
+  "chicago": 1,
+  "compile-time": 1,
+  "runtime": 1,
+  "programming-concepts": 1,
+  "coding-basics": 1,
+  "welcome": 1,
+  "introduction": 1,
+  "learning-tech": 1,
+  "beginners": 1,
+  "career-journey": 1
+}

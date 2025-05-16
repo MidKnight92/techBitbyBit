@@ -1,5 +1,5 @@
 import 'css/prism.css'
-
+import Script from 'next/script'
 import PageTitle from '@/components/PageTitle'
 import { components } from '@/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
@@ -23,9 +23,9 @@ export async function generateMetadata(props: {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
   const post = allBits.find((p) => p.slug === slug)
-  const authorList = post!.authors // || ['default']
+  const authorList = post!.authors
   const authorDetails = authorList!.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
+    const authorResults = allAuthors.find((a) => a.name === author)
     return coreContent(authorResults as Authors)
   })
   if (!post) {
@@ -35,7 +35,6 @@ export async function generateMetadata(props: {
   const publishedAt = new Date(post.date).toISOString()
   const modifiedAt = new Date(post.lastmod || post.date).toISOString()
   const authors = authorDetails.map((author) => author.name)
-  console.log('AUTHORS 38', authors)
   let imageList = [siteMetadata.socialBanner]
   if (post.images) {
     imageList = typeof post.images === 'string' ? [post.images] : post.images
@@ -45,7 +44,6 @@ export async function generateMetadata(props: {
       url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
     }
   })
-  console.log('[siteMetadata.author]', siteMetadata.author)
   return {
     title: post.title,
     description: post.summary,
@@ -81,17 +79,11 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
   const post = allBits.find((p) => p.slug === slug) as Bits
-  const authorList = post?.authors // || ['default']
+  const authorList = post?.authors
   const authorDetails = authorList!.map((author) => {
-    console.log('AUTHOR ==>', author)
-    const authorResults = allAuthors.find((p) => {
-      console.log('p slug', p.slug)
-      return p.slug === author
-    })
-    console.log('AUTHOR result ==>', authorResults)
+    const authorResults = allAuthors.find((p) => p.name === author)
     return coreContent(authorResults as Authors)
   })
-  // console.log(post)
   const mainContent = coreContent(post)
   const jsonLd = post.structuredData
   jsonLd['author'] = authorDetails.map((author) => {
@@ -109,7 +101,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+      <Script async defer src="https://cusdis.com/js/cusdis.es.js" strategy="afterInteractive" />
       <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
