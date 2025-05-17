@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Authors, Bits } from 'contentlayer/generated'
@@ -84,7 +85,7 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
             </dl>
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
               <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
-              <div className="pt-6 pb-6 text-center text-sm text-gray-700 dark:text-gray-300">
+              <div className="pt-6 pb-6 text-center text-sm text-black dark:text-white">
                 <LikeButtonVercelKV slug={slug} />
                 <Comments slug={slug} title={title} url={canonicalUrl} />
               </div>
