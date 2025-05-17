@@ -10370,6 +10370,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-cusdis@npm:^2.1.3":
+  version: 2.1.3
+  resolution: "react-cusdis@npm:2.1.3"
+  peerDependencies:
+    react: ^17.0.0
+    react-dom: ^17.0.0
+  checksum: 73a5a7c850214e6538ffa399eb5ddb342d9904e1a8e3e76149fb29ce806dc2926ffd7ccee879493a9dd499b9f3dba7b886ea603b287f924eb13d353337b12c64
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -12014,6 +12024,7 @@ __metadata:
     prettier: ^3.0.0
     prettier-plugin-tailwindcss: ^0.6.11
     react: 18.3.1
+    react-cusdis: ^2.1.3
     react-dom: 18.3.1
     reading-time: 1.5.0
     rehype-autolink-headings: ^7.1.0

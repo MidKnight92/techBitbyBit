@@ -2,7 +2,8 @@ import { kv } from '@vercel/kv'
 import { type NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
-  const slug = params.slug
+  const { slug } = await params
+
   try {
     const likes = await kv.get<number>(`likes:${slug}`)
     return NextResponse.json({ slug, likes: likes || 0 })
