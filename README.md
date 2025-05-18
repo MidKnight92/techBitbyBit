@@ -14,7 +14,7 @@ This site is based on the excellent [Tailwind Next.js Starter Blog v2](https://g
 - Built with **Next.js 15** and **Tailwind CSS v4**
 - Uses **Contentlayer** for seamless Markdown/MDX content
 - Custom font integration: _Orbitron_ and _Work Sans_
-- Custom colors for fonts and display modes 
+- Custom colors for fonts and display modes
 - Light & dark mode with theme toggling
 - Responsive design and accessible components
 - SEO and performance optimized
