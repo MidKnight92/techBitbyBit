@@ -1,8 +1,8 @@
 import { kv } from '@vercel/kv'
-import { type NextRequest, NextResponse,  } from 'next/server'
+import { type NextRequest, NextResponse  } from 'next/server'
 
-export async function GET(request: NextRequest, context: NextApiRequestContext) {
-  const { slug } = context.params
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
 
   try {
     const likes = await kv.get<number>(`likes:${slug}`)
@@ -13,8 +13,8 @@ export async function GET(request: NextRequest, context: NextApiRequestContext) 
   }
 }
 
-export async function POST(request: NextRequest, { params }: { params: { slug: string } }) {
-  const { slug } = params
+export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   try {
     const newLikes = await kv.incr(`likes:${slug}`)
     return NextResponse.json({ slug, likes: newLikes })
