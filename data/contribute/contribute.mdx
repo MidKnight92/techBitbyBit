@@ -1,0 +1,158 @@
+---
+title: 'How to Contribute a Post to Tech Bit-by-Bit'
+---
+
+Welcome, fellow tech enthusiasts, to the contribution guide for **Tech Bit-by-Bit**!
+
+I started this blog with a simple goal: to make technology less intimidating by breaking down complex ideas in a plain, simple, and relatable way. If you share that passion and have an idea or a concept you'd love to explain "bit by bit," you're in the perfect place to share your knowledge!
+
+We're always looking for fresh perspectives and simple explanations of tech topics. Whether it's a concept you just grasped, a common problem you solved, or an analogy that helped something click for you – if it makes tech easier to understand, we want to hear about it!
+
+## What We're Looking For
+
+The best **Tech Bit-by-Bit** posts:
+
+- **Make it Simple:** Avoid excessive jargon. Explain complex terms if you must use them.
+- **Use Analogies/Stories:** Relate technical ideas to everyday concepts or real-world experiences.
+- **Focus on the "Why":** Help readers understand the purpose or benefit, not just the technical steps.
+- **Are Approachable:** Maintain a friendly, conversational, and encouraging tone. Humor is welcome!
+- **Cover Core Concepts:** Web development, programming basics, data, tools, processes, even just navigating the industry – anything that helps demystify tech.
+- **Are Concise:** Aim for clarity over length. Short, focused posts are often more impactful.
+
+## How to Contribute
+
+Contributing is straightforward! Here’s the general process:
+
+1.  **Come Up With an Idea:** Think about a tech concept you can explain simply. You can pitch the idea first (e.g., via a GitHub Issue) or just write the draft.
+2.  **Write Your Post:** Draft your explanation following the style points above.
+3.  **Format Your Post:** Write your post in **MDX** format. This is Markdown with extra features, but basic Markdown is usually all you need.
+4.  **Submit Your Post:** The preferred method is via a [GitHub Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-with-pull-requests/creating-a-pull-request) to the blog's repository. If you're new to GitHub or PRs, contact Steph (Stephanie Viveros) for alternative submission methods.
+5.  **Create and Submit Your Author Page:** Write your Author page and submit it by creating a separate Pull Request (PR) (see example below).
+
+## Writing Your Post in MDX (Markdown Basics)
+
+Your post should be written in **Markdown**, saved with an `.mdx` extension (e.g., `my-awesome-post.mdx`). Markdown is a simple way to format text using plain characters.
+
+Here’s a quick rundown of common Markdown you'll use:
+
+- **Headings:** Use `#` for headings. The post title in the frontmatter is the main title (`<h1>`), so start your sections with `##` (Heading 2) or `###` (Heading 3).
+
+  ```markdown
+  # Post Title (Goes in frontmatter)
+
+  ## Your First Section Heading
+
+  ### A Sub-heading within the section
+  ```
+
+- **Paragraphs:** Just write text. Leave a blank line between paragraphs.
+
+  ```markdown
+  This is the first paragraph.
+
+  This is the second paragraph.
+  ```
+
+- **Emphasis:**
+  - _Italics_ or _Italics_
+  - **Bold** or **Bold**
+  - **_Bold and Italics_** or **_Bold and Italics_**
+- **Lists:** Use `*`, `-`, or `+` for unordered lists. Use numbers for ordered lists.
+
+  ```markdown
+  - Item one
+  - Item two
+    - Sub-item A
+
+  1. First step
+  2. Second step
+  ```
+
+- **Code:** Use backticks `` ` `` for `inline code`. Use triple backticks ` ``` ` for `code blocks`.
+
+  ````markdown
+  You can use `console.log()` for debugging.
+
+  ```javascript
+  // This is a code block
+  function sayHello() {
+    console.log('Hello, World!')
+  }
+  ```
+  ````
+
+  ```
+
+  ```
+
+- **Links:**
+  ```markdown
+  Visit the [Tech Bit-by-Bit Homepage](/).
+  ```
+- **Images:**
+
+  ```markdown
+  ![Alt text for the image](/path/to/your/image.jpg)
+  ```
+
+  Make sure image files are placed in the `public` folder and use the correct path starting from `/`. For example, `/static/images/your-image.jpg` if placed in `public/static/images/`.
+
+- **Horizontal Rule:** Use three or more hyphens, asterisks, or underscores on a line.
+  ```markdown
+  ---
+  ```
+
+**Need more Markdown help?**
+
+Markdown is easy to learn! Check out this comprehensive guide for more details:
+
+- [**Markdown Guide: Basic Syntax**](https://www.markdownguide.org/basic-syntax/)
+
+Remember to include Frontmatter at the very top of your `.mdx` file!
+
+```markdown
+---
+title: 'Example Title' # required
+date: '2025-05-17' # required
+authors: ['FirstName LastName'] # required
+tags: ['contribute', 'writing', 'guide', 'community', 'markdown', 'blogging']
+draft: false
+summary: 'Summary Example'
+canonicalUrl: 'url' # required
+---
+```
+
+## Author page template
+
+The file naming protocol is FirstName_LastName.mdx, for example `Gatsby_Viveros.mdx`. The name field is required, all other fields displayed are optional and don't need to be added if unused.
+
+```markdown
+---
+name: Gatsby Viveros # required
+avatar: /static/images/gatsby-avatar.png
+occupation: Director of Cuddles
+company: Self employed
+bio: '',
+email: '',
+website: '',
+linkedin: '',
+github: ''
+youtube: ''
+location: 'Chicago, IL'
+tagline: ''
+---
+
+Hi, I’m Gatsby. I’m not just a Boston Terrier—I’m the official nap supervisor, emotional support expert, influencer, and head of snack security at _Tech Bit by Bit_.
+
+When I’m not curled up next to Stephanie while she codes, I enjoy long walks, treats, traveling, and chilling by the lake.
+
+_Yes, I’m named after the character from the book, not the movie. No, I don’t know how to code. Yet._
+```
+
+## Submission & Review
+
+Once you've written and formatted your post in MDX, submit it via Pull Request on the blog's GitHub repository. I will review your submission as soon as I can and might suggest edits to fit the style or clarify explanations. I'll work together to get your post ready and then !
+
+Thank you for considering contributing to Tech Bit-by-Bit! Your insights can help make tech clearer for others.
+
+Ready to share your bit of tech knowledge? Get writing!

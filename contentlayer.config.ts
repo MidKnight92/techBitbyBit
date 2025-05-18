@@ -148,6 +148,27 @@ export const About = defineDocumentType(() => ({
   },
 }))
 
+export const Contribute = defineDocumentType(() => ({
+  name: 'Contribute',
+  filePathPattern: 'contribute/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+  },
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -173,7 +194,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Bits, Authors, About],
+  documentTypes: [Bits, Authors, About, Contribute],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
