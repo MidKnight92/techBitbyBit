@@ -1,5 +1,5 @@
 import { kv } from '@vercel/kv'
-import  { type NextRequest, type NextResponse  } from 'next/server'
+import  { type NextRequest, NextResponse  } from 'next/server'
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
