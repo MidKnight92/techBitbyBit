@@ -61,15 +61,13 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
                   {authorDetails.map((author, idx) => (
                     <li className="flex items-center space-x-2" key={`${author.name}-${idx}`}>
                       <Link href={`/authors/${author.slug}`}>
-                        {author.avatar && (
-                          <Image
-                            src={author.avatar}
-                            width={38}
-                            height={38}
-                            alt="avatar"
-                            className="h-10 w-10 rounded-full"
-                          />
-                        )}
+                        <Image
+                          src={author.avatar || '/static/images/defaultAvatar.png'}
+                          width={38}
+                          height={38}
+                          alt="avatar"
+                          className="h-10 w-10 rounded-full"
+                        />
                         <dl className="text-sm leading-5 font-light tracking-normal whitespace-nowrap">
                           <dt className="sr-only">Name</dt>
                           <dd className="hover:text-primary-500 dark:hover:text-primary-400 m-1 text-gray-900 dark:text-gray-100">
