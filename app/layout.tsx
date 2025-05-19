@@ -74,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         sizes="16x16"
         href={`${basePath}/static/favicons/favicon-16x16.png`}
       />
-      <link rel="manifest" href={`${basePath}/static/favicons/site.webmanifest`} />
+      <link rel="manifest" href={`${basePath}/site.webmanifest`} />
       <meta name="msapplication-TileColor" content="#111111" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
