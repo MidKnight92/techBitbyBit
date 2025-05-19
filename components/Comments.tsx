@@ -20,6 +20,8 @@ export default function Comments({
     const theme = resolvedTheme === 'system' ? 'auto' : resolvedTheme
     setCommentsTheme(theme as Theme)
   }, [resolvedTheme])
+
+  console.log(process.env.NEXT_PUBLIC_CUSDIS_APP_ID)
   return (
     <>
       {!!process?.env?.NEXT_PUBLIC_CUSDIS_APP_ID && (

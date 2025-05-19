@@ -1,12 +1,12 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Contribute, Terms, Privacy } from 'contentlayer/generated'
+import type { Contribute, Terms, Privacy, Conduct } from 'contentlayer/generated'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 interface LayoutProps {
-  content: CoreContent<Contribute | Terms | Privacy>
+  content: CoreContent<Contribute | Terms | Privacy | Conduct>
   children: ReactNode
 }
 

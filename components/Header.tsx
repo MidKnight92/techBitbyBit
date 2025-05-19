@@ -16,7 +16,13 @@ const Header = () => {
     <header className={headerClass}>
       <Link href="/" aria-label={siteMetadata.headerTitle}>
         <div className="mr-3 hidden hover:brightness-175 active:brightness-135 md:block">
-          <Image src="/static/images/logo.png" alt="Logo" width={100} height={100} />
+          <Image
+            src="/static/images/logo.png"
+            alt="Logo"
+            width={800}
+            height={800}
+            className="h-20 w-auto"
+          />
         </div>
         <div className="text-md mr-3 h-6 font-semibold sm:block md:hidden">
           {siteMetadata.headerTitle}

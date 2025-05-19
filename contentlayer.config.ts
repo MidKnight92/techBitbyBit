@@ -211,6 +211,27 @@ export const Privacy = defineDocumentType(() => ({
   },
 }))
 
+export const Conduct = defineDocumentType(() => ({
+  name: 'Conduct',
+  filePathPattern: 'conduct/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+  },
+  computedFields: {
+    ...computedFields,
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+      }),
+    },
+  },
+}))
+
 export const Authors = defineDocumentType(() => ({
   name: 'Authors',
   filePathPattern: 'authors/**/*.mdx',
@@ -236,7 +257,7 @@ export const Authors = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Bits, Authors, About, Contribute, Privacy, Terms],
+  documentTypes: [Bits, Authors, About, Contribute, Privacy, Terms, Conduct],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

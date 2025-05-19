@@ -23,6 +23,7 @@ export default function LikeButtonVercelKV({ slug }) {
 
   useEffect(() => {
     fetchLikes()
+    console.info(likes)
     if (localStorage.getItem(storageKey) === 'true') {
       setIsLiked(true)
     }

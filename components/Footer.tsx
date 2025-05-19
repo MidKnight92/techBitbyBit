@@ -25,6 +25,8 @@ export default function Footer() {
           <Link href="/privacy-policy">Privacy Policy</Link>
           <div>{` • `}</div>
           <Link href="/terms">Terms of Service</Link>
+          <div>{` • `}</div>
+          <Link href="/conduct">Code of Conduct</Link>
         </div>
       </div>
     </footer>
