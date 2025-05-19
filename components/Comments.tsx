@@ -21,7 +21,6 @@ export default function Comments({
     setCommentsTheme(theme as Theme)
   }, [resolvedTheme])
 
-  console.log(process.env.NEXT_PUBLIC_CUSDIS_APP_ID)
   return (
     <>
       {!!process?.env?.NEXT_PUBLIC_CUSDIS_APP_ID && (

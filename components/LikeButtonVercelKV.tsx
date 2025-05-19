@@ -1,10 +1,16 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 
+enum LikeAction {
+  Increment = 'increment',
+  Decrement = 'decrement',
+}
+
 export default function LikeButtonVercelKV({ slug }) {
   const [likes, setLikes] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [isProcessing, setIsProcessing] = useState(false)
   const storageKey = `user_liked_${slug}`
 
   const fetchLikes = useCallback(async () => {
@@ -12,8 +18,8 @@ export default function LikeButtonVercelKV({ slug }) {
     try {
       const res = await fetch(`/api/likes/${slug}`)
       if (res.ok) {
-        const data = await res.json()
-        setLikes(data.likes)
+        const { likes } = await res.json()
+        setLikes(likes)
       }
     } catch (error) {
       console.error('Failed to fetch likes', error)
@@ -23,35 +29,44 @@ export default function LikeButtonVercelKV({ slug }) {
 
   useEffect(() => {
     fetchLikes()
-    console.info(likes)
     if (localStorage.getItem(storageKey) === 'true') {
       setIsLiked(true)
     }
   }, [fetchLikes, storageKey])
 
-  const handleLike = async () => {
-    if (isLiked) return
+  const rollback = useCallback(
+    (action: LikeAction) => {
+      setIsLiked((prevLiked) => !prevLiked)
+      localStorage.removeItem(storageKey)
+      setLikes((prevLikes) => Math.max(0, prevLikes + (action === LikeAction.Increment ? -1 : 1)))
+    },
+    [storageKey]
+  )
 
-    setIsLiked(true)
-    localStorage.setItem(storageKey, 'true')
-    setLikes((prevLikes) => prevLikes + 1)
-
+  const handleLike = async (action: LikeAction) => {
+    if (isProcessing) return
+    setIsProcessing(true)
+    const nextLiked = !isLiked
+    setIsLiked(nextLiked)
+    localStorage.setItem(storageKey, `${nextLiked}`)
+    setLikes((prevLikes) => Math.max(0, prevLikes + (action === LikeAction.Increment ? 1 : -1)))
     try {
-      const res = await fetch(`/api/likes/${slug}`, { method: 'POST' })
+      const res =
+        action === LikeAction.Increment
+          ? await fetch(`/api/likes/${slug}`, { method: 'POST' })
+          : await fetch(`/api/likes/${slug}`, { method: 'DELETE' })
       if (res.ok) {
         const data = await res.json()
         setLikes(data.likes)
       } else {
-        setIsLiked(false)
-        localStorage.removeItem(storageKey)
-        setLikes((prevLikes) => prevLikes - 1)
+        rollback(action)
         console.error('Failed to record like')
       }
     } catch (error) {
-      setIsLiked(false)
-      localStorage.removeItem(storageKey)
-      setLikes((prevLikes) => prevLikes - 1)
+      rollback(action)
       console.error('Failed to record like', error)
+    } finally {
+      setTimeout(() => setIsProcessing(false), 1000)
     }
   }
 
@@ -59,7 +74,12 @@ export default function LikeButtonVercelKV({ slug }) {
 
   return (
     <div className="flex space-x-4">
-      <button onClick={handleLike} disabled={isLiked}>
+      <button
+        aria-pressed={isLiked}
+        aria-label={isLiked ? 'Unlike this post' : 'Like this post'}
+        onClick={() => handleLike(isLiked ? LikeAction.Decrement : LikeAction.Increment)}
+        disabled={isProcessing}
+      >
         {isLiked ? '💙 Liked' : '🩵 Like'}
       </button>
       {likes > 0 && (

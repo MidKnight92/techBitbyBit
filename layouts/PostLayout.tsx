@@ -84,6 +84,13 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
               <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
               <div className="pt-6 pb-6 text-center text-sm text-gray-700 dark:text-gray-300">
                 <LikeButtonVercelKV slug={slug} />
+                <p className="my-6 text-sm text-gray-600">
+                  Be kind, stay constructive, and follow our{' '}
+                  <Link href="/conduct" className="text-blue-600 underline hover:text-blue-800">
+                    Code of Conduct
+                  </Link>
+                  .
+                </p>
                 <Comments slug={slug} title={title} url={canonicalUrl} />
               </div>
             </div>

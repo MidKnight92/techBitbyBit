@@ -7,7 +7,6 @@ import { genPageMetadata } from 'app/seo'
 export const metadata = genPageMetadata({ title: 'Privacy Policy' })
 
 export default async function Page() {
-  console.log(allPrivacies)
   const privacyContent = allPrivacies.find((p) => p.slug === 'privacy-policy') as Privacy
   const mainContent = coreContent(privacyContent)
 
