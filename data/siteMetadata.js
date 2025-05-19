@@ -12,9 +12,9 @@ const siteMetadata = {
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/tbb-banner-patreon.png`,
   email: 'techbitbybitmedia@gmail.com',
-  youtube: 'www.youtube.com/@Tech-Bit-by-Bit',
+  youtube: 'https://www.youtube.com/@Tech-Bit-by-Bit',
   // podcast: '',
-  buyMeACoffee: 'buymeacoffee.com/techbitbybit',
+  buyMeACoffee: 'https://buymeacoffee.com/techbitbybit',
   locale: 'en-US',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,
