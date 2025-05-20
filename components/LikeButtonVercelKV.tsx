@@ -1,4 +1,5 @@
 'use client'
+import { useAuth } from '@clerk/nextjs'
 import { useState, useEffect, useCallback } from 'react'
 
 enum LikeAction {
@@ -11,6 +12,7 @@ export default function LikeButtonVercelKV({ slug }) {
   const [isLiked, setIsLiked] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isProcessing, setIsProcessing] = useState(false)
+  const { isSignedIn } = useAuth()
   const storageKey = `user_liked_${slug}`
 
   const fetchLikes = useCallback(async () => {
@@ -44,7 +46,7 @@ export default function LikeButtonVercelKV({ slug }) {
   )
 
   const handleLike = async (action: LikeAction) => {
-    if (isProcessing) return
+    if (!isSignedIn || isProcessing) return
     setIsProcessing(true)
     const nextLiked = !isLiked
     setIsLiked(nextLiked)

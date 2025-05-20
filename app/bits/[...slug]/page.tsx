@@ -67,9 +67,7 @@ export const generateStaticParams = async () => {
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
-  const nonce = (await headers()).get('x-nonce') ?? undefined
   const params = await props.params
-  // const {nonce} = props
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(sortPosts(allBits))
