@@ -2,12 +2,12 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
-interface Props {
-  children: ReactNode
+import { Props } from 'types/childrenOnly'
+interface AboutProps extends Props {
   content: Omit<Authors, '_id' | '_raw' | 'body'>
 }
 
-export default function AboutLayout({ children, content }: Props) {
+export default function AboutLayout({ children, content }: AboutProps) {
   const { name, avatar, occupation, company, email, linkedin, github } = content
 
   return (

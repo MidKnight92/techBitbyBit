@@ -34,7 +34,7 @@ export async function POST(
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
-){
+) {
   const { slug } = await params
   try {
     const newLikes = await kv.decr(`likes:${slug}`)

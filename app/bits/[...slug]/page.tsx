@@ -9,6 +9,8 @@ import PostLayout from '@/layouts/PostLayout'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
+import { headers } from 'next/headers'
+import Script from 'next/script'
 
 const defaultLayout = 'PostLayout'
 // In future add additional post layout below
@@ -66,6 +68,7 @@ export const generateStaticParams = async () => {
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
+  const nonce = (await headers()).get('x-nonce') ?? undefined
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
@@ -96,9 +99,11 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 
   return (
     <>
-      <script
+      <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        nonce={nonce}
+        id="bit-312"
       />
       <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />

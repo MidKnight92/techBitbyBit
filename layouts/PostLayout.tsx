@@ -10,6 +10,8 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import LikeButtonVercelKV from '@/components/LikeButtonVercelKV'
 import Comments from '@/components/Comments'
+import { Props } from 'types/childrenOnly'
+import AuthGate from '@/components/AuthGate'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 
@@ -20,12 +22,11 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
   day: 'numeric',
 }
 
-interface LayoutProps {
+interface LayoutProps extends Props {
   content: CoreContent<Bits>
   authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
-  children: ReactNode
 }
 
 export default function PostLayout({ authorDetails, content, next, prev, children }: LayoutProps) {
@@ -83,15 +84,17 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
             <div className="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
               <div className="prose dark:prose-invert max-w-none pt-10 pb-8">{children}</div>
               <div className="pt-6 pb-6 text-center text-sm text-gray-700 dark:text-gray-300">
-                <LikeButtonVercelKV slug={slug} />
-                <p className="my-6 text-sm text-gray-600">
-                  Be kind, stay constructive, and follow our{' '}
-                  <Link href="/conduct" className="text-blue-600 underline hover:text-blue-800">
-                    Code of Conduct
-                  </Link>
-                  .
-                </p>
-                <Comments slug={slug} title={title} url={canonicalUrl} />
+                <AuthGate>
+                  <LikeButtonVercelKV slug={slug} />
+                  <p className="my-6 text-sm text-gray-600">
+                    Be kind, stay constructive, and follow our{' '}
+                    <Link href="/conduct" className="text-blue-600 underline hover:text-blue-800">
+                      Code of Conduct
+                    </Link>
+                    .
+                  </p>
+                  <Comments slug={slug} title={title} url={canonicalUrl} />
+                </AuthGate>
               </div>
             </div>
             <footer>

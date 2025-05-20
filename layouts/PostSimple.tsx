@@ -4,10 +4,10 @@ import type { Contribute, Terms, Privacy, Conduct } from 'contentlayer/generated
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import { Props } from 'types/childrenOnly'
 
-interface LayoutProps {
+interface LayoutProps extends Props {
   content: CoreContent<Contribute | Terms | Privacy | Conduct>
-  children: ReactNode
 }
 
 export default function PostLayout({ content, children }: LayoutProps) {

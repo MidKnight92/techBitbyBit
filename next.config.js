@@ -8,17 +8,7 @@ const withBundleAnalyzer = withBundleAnalyzerFactory({
 
 const isDev = process.env.NODE_ENV !== 'production'
 
-const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' giscus.app analytics.umami.is https://cusdis.com${isDev ? " 'unsafe-eval'" : ''};
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cusdis.com;
-  img-src * blob: data:;
-  media-src *.s3.amazonaws.com;
-  connect-src 'self' https://cusdis.com;
-  font-src 'self' https://fonts.gstatic.com;
-  frame-src giscus.app cusdis.com;
-  manifest-src 'self';
-`
+
 
 const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
@@ -86,14 +76,6 @@ export default () => {
         },
       ],
       unoptimized,
-    },
-    async headers() {
-      return [
-        {
-          source: '/(.*)',
-          headers: securityHeaders,
-        },
-      ]
     },
     webpack: (config, { dev }) => {
       if (!dev) {

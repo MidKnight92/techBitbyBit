@@ -10,6 +10,8 @@ import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
+import { ClerkProvider } from '@clerk/nextjs'
+import { cookies } from 'next/headers'
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -59,38 +61,48 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = (await cookies()).get('nonce')?.value || ''
+
   const basePath = process.env.BASE_PATH || ''
 
   return (
-    <html
-      lang={siteMetadata.language}
-      className={`${orbitron.variable} ${workSans.variable} scroll-smooth`}
-      suppressHydrationWarning
-    >
-      <link
-        rel="icon"
-        type="image/png"
-        sizes="16x16"
-        href={`${basePath}/static/favicons/favicon-16x16.png`}
-      />
-      <link rel="manifest" href={`${basePath}/site.webmanifest`} />
-      <meta name="msapplication-TileColor" content="#111111" />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
-      <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-      <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
-        <ThemeProviders>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SectionContainer>
-            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-              <Header />
-              <main className="mb-auto">{children}</main>
-            </SearchProvider>
-            <Footer />
-          </SectionContainer>
-        </ThemeProviders>
-      </body>
-    </html>
+    <ClerkProvider dynamic>
+      <html
+        lang={siteMetadata.language}
+        nonce={nonce}
+        className={`${orbitron.variable} ${workSans.variable} scroll-smooth`}
+        suppressHydrationWarning
+      >
+        <head nonce={nonce}>
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href={`${basePath}/static/favicons/favicon-16x16.png`}
+          />
+          <link rel="manifest" href={`${basePath}/site.webmanifest`} />
+          <meta name="msapplication-TileColor" content="#111111" />
+          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
+          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
+          <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+        </head>
+        <body
+          nonce={nonce}
+          className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white"
+        >
+          <ThemeProviders>
+            <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+            <SectionContainer>
+              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                <Header />
+                <main className="mb-auto">{children}</main>
+              </SearchProvider>
+              <Footer />
+            </SectionContainer>
+          </ThemeProviders>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
