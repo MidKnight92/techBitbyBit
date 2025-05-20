@@ -1,4 +1,6 @@
-const TableWrapper = ({ children }) => {
+import { Props } from "types/childrenOnly"
+
+const TableWrapper = ({ children }: Props) => {
   return (
     <div className="w-full overflow-x-auto">
       <table>{children}</table>

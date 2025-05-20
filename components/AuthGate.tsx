@@ -1,14 +1,18 @@
+'use client'
+import { useAuth } from '@clerk/nextjs'
+import Link from 'next/link'
 import { Props } from 'types/childrenOnly'
-import { SignInButton, SignUpButton, SignedIn, SignedOut } from '@clerk/nextjs'
 
 export default function AuthGate({ children }: Props) {
-  return (
-    <>
-      <SignedOut>
-        <SignInButton />
-        <SignUpButton />
-      </SignedOut>
-      <SignedIn>{children}</SignedIn>
-    </>
-  )
+  const { isSignedIn } = useAuth()
+
+  if (!isSignedIn) {
+    return (
+      <p className="hover:text-blue-800"> {/*fix hover color*/}
+        <Link href="/sign-in">Please Sign in to like or comment.</Link>
+      </p>
+    )
+  }
+
+  return <>{children}</>
 }

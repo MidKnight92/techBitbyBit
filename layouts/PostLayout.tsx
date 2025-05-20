@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Authors, Bits } from 'contentlayer/generated'
 import Link from 'next/link'
@@ -29,7 +28,13 @@ interface LayoutProps extends Props {
   prev?: { path: string; title: string }
 }
 
-export default function PostLayout({ authorDetails, content, next, prev, children }: LayoutProps) {
+export default function PostLayout({
+  authorDetails,
+  content,
+  next,
+  prev,
+  children,
+}: LayoutProps) {
   const { filePath, path, slug, date, title, tags, canonicalUrl, authors } = content
   const basePath = path.split('/')[0]
   return (

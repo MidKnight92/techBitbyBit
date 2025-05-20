@@ -11,7 +11,11 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
+import { NonceProvider } from './nonce-providers'
+import { Props } from 'types/childrenOnly'
+import React from 'react'
+import { dark, neobrutalism } from '@clerk/themes'
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -61,20 +65,30 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const nonce = (await cookies()).get('nonce')?.value || ''
+export default async function RootLayout({ children }: Props) {
+  // const nonce = (await headers()).get('x-nonce') || ''
 
   const basePath = process.env.BASE_PATH || ''
 
   return (
-    <ClerkProvider dynamic>
+    <ClerkProvider
+      appearance={{
+        baseTheme: [neobrutalism],
+        variables: {
+          colorPrimary: 'blue',
+          fontWeight: { medium: 500 },
+          fontFamilyButtons: 'Orbitron',
+          fontFamily: 'Orbitron',
+        },
+      }}
+      dynamic
+    >
       <html
         lang={siteMetadata.language}
-        nonce={nonce}
         className={`${orbitron.variable} ${workSans.variable} scroll-smooth`}
         suppressHydrationWarning
       >
-        <head nonce={nonce}>
+        <head>
           <link
             rel="icon"
             type="image/png"
@@ -87,10 +101,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
           <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
         </head>
-        <body
-          nonce={nonce}
-          className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white"
-        >
+        <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
           <ThemeProviders>
             <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
             <SectionContainer>
