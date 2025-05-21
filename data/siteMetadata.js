@@ -20,7 +20,7 @@ const siteMetadata = {
   analytics: {
 
     umamiAnalytics: {
-      umamiWebsiteId: process.env.NEXT_UMAMI_ID, 
+      umamiWebsiteId: process.env.NEXT_PUBLIC_UMAMI_ID, 
       // You may also need to overwrite the script if you're storing data in the US - ex:
       // src: 'https://us.umami.is/script.js'
       // Remember to add 'us.umami.is' in `next.config.js` as a permitted domain for the CSP

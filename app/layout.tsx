@@ -107,7 +107,7 @@ export default async function RootLayout({ children }: Props) {
           <script
             defer
             src="https://cloud.umami.is/script.js"
-            data-website-id={siteMetadata.analytics}
+            data-website-id={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId}
           ></script>
         </head>
         <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
