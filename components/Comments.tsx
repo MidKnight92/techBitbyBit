@@ -23,7 +23,7 @@ export default function Comments({
 
   return (
     <>
-      {!!process?.env?.NEXT_PUBLIC_CUSDIS_APP_ID && (
+      {!!process.env?.NEXT_PUBLIC_CUSDIS_APP_ID && (
         <div className="mt-4">
           <ReactCusdis
             key={commentsTheme}
