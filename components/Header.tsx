@@ -5,6 +5,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import { SignedIn, SignedOut, SignInButton, SignOutButton } from '@clerk/nextjs'
 
 const Header = () => {
   let headerClass = 'flex items-center w-full bg-[#f9fafb] dark:bg-[#111111] justify-between py-10'
@@ -44,6 +45,14 @@ const Header = () => {
         </div>
         <SearchButton />
         <ThemeSwitch />
+        <div className="hidden md:block">
+          <SignedOut>
+            <SignInButton mode="modal" />
+          </SignedOut>
+          <SignedIn>
+            <SignOutButton />
+          </SignedIn>
+        </div>
         <MobileNav />
       </div>
     </header>
