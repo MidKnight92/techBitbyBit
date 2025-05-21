@@ -8,8 +8,6 @@ const withBundleAnalyzer = withBundleAnalyzerFactory({
 
 const isDev = process.env.NODE_ENV !== 'production'
 
-
-
 // const securityHeaders = [
 //   // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 //   {

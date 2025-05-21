@@ -28,13 +28,7 @@ interface LayoutProps extends Props {
   prev?: { path: string; title: string }
 }
 
-export default function PostLayout({
-  authorDetails,
-  content,
-  next,
-  prev,
-  children,
-}: LayoutProps) {
+export default function PostLayout({ authorDetails, content, next, prev, children }: LayoutProps) {
   const { filePath, path, slug, date, title, tags, canonicalUrl, authors } = content
   const basePath = path.split('/')[0]
   return (

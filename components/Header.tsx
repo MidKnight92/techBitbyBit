@@ -45,7 +45,7 @@ const Header = () => {
         </div>
         <SearchButton />
         <ThemeSwitch />
-        <div className="hidden md:block">
+        <div className="font-orbitron hover:text-primary-500 dark:hover:text-primary-400 text-md mr-3 hidden tracking-widest text-gray-900 md:block dark:text-gray-100">
           <SignedOut>
             <SignInButton mode="modal" />
           </SignedOut>

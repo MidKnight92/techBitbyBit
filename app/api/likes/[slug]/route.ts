@@ -4,11 +4,11 @@ import { currentUser } from '@clerk/nextjs/server'
 
 const verifyUser = async () => {
   const user = await currentUser()
-  if (!user){
+  if (!user) {
     throw new Error('Not Signed in')
   }
 
-  if (user.banned){
+  if (user.banned) {
     throw new Error('User is banned')
   }
 }

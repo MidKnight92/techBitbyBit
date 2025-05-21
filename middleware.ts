@@ -39,12 +39,9 @@ const applyCsp = (req: NextRequest) => {
 
   const requestHeaders = new Headers(req.headers)
   // requestHeaders.set('x-nonce', nonce)
- 
-  requestHeaders.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
- 
+
+  requestHeaders.set('Content-Security-Policy', contentSecurityPolicyHeaderValue)
+
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,

@@ -1,4 +1,4 @@
-import { Props } from "types/childrenOnly"
+import { Props } from 'types/childrenOnly'
 
 const TableWrapper = ({ children }: Props) => {
   return (
