@@ -80,6 +80,10 @@ export default async function RootLayout({ children }: Props) {
           fontFamilyButtons: 'Orbitron',
           fontFamily: 'Orbitron',
         },
+        captcha: {
+          theme: 'light',
+          size: 'compact',
+        },
       }}
       dynamic
     >
@@ -100,6 +104,11 @@ export default async function RootLayout({ children }: Props) {
           <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
           <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
           <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+          <script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id={siteMetadata.analytics}
+          ></script>
         </head>
         <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
           <ThemeProviders>
