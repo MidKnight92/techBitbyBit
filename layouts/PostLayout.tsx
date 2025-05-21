@@ -12,8 +12,6 @@ import Comments from '@/components/Comments'
 import { Props } from 'types/childrenOnly'
 import AuthGate from '@/components/AuthGate'
 
-const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
-
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
   year: 'numeric',
@@ -29,7 +27,7 @@ interface LayoutProps extends Props {
 }
 
 export default function PostLayout({ authorDetails, content, next, prev, children }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, canonicalUrl, authors } = content
+  const { path, slug, date, title, tags, canonicalUrl } = content
   const basePath = path.split('/')[0]
   return (
     <SectionContainer>
@@ -55,19 +53,19 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
           </header>
           <div className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0 dark:divide-gray-700">
             <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-              <dt className="sr-only">Add</dt>
+              <dt className="sr-only">Authors</dt>
               <dd>
                 <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-y-8 xl:space-x-0">
                   {authorDetails.map((author, idx) => (
                     <li className="flex items-center space-x-2" key={`${author.name}-${idx}`}>
+                      <Image
+                        src={author.avatar || '/static/images/defaultAvatar.png'}
+                        width={38}
+                        height={38}
+                        alt="avatar"
+                        className="h-10 w-10 rounded-full"
+                      />
                       <Link href={`/authors/${author.slug}`}>
-                        <Image
-                          src={author.avatar || '/static/images/defaultAvatar.png'}
-                          width={38}
-                          height={38}
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
                         <dl className="text-sm leading-5 font-light tracking-normal whitespace-nowrap">
                           <dt className="sr-only">Name</dt>
                           <dd className="hover:text-primary-500 dark:hover:text-primary-400 m-1 text-gray-900 dark:text-gray-100">
