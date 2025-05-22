@@ -1,6 +1,5 @@
 import 'css/tailwind.css'
 import 'remark-github-blockquote-alert/alert.css'
-import Script from 'next/script'
 import { Orbitron, Work_Sans } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
@@ -16,6 +15,8 @@ import React from 'react'
 import { neobrutalism } from '@clerk/themes'
 import ScrollBottom from '@/components/ScrollBottom'
 import ScrollTop from '@/components/ScrollTop'
+import CookieBanner from '@/components/CookieBanner'
+import ConditionalScripts from '@/components/ConditionalScripts'
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -104,11 +105,6 @@ export default async function RootLayout({ children }: Props) {
           <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
           <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
           <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-          <Script
-            defer
-            src="https://cloud.umami.is/script.js"
-            data-website-id={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId}
-          />
         </head>
         <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
           <ThemeProviders>
@@ -119,13 +115,14 @@ export default async function RootLayout({ children }: Props) {
                 <ScrollBottom />
                 <main className="mb-auto">{children}</main>
                 <ScrollTop />
+                <CookieBanner />
               </SearchProvider>
               <Footer />
             </SectionContainer>
           </ThemeProviders>
         </body>
       </html>
-      <Script src="/scripts/umamiEvent.js" strategy="lazyOnload" id="umami-script" />
+      <ConditionalScripts />
     </ClerkProvider>
   )
 }
