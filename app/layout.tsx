@@ -1,6 +1,6 @@
 import 'css/tailwind.css'
 import 'remark-github-blockquote-alert/alert.css'
-
+import Script from 'next/script'
 import { Orbitron, Work_Sans } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
@@ -104,11 +104,11 @@ export default async function RootLayout({ children }: Props) {
           <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
           <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
           <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-          <script
+          <Script
             defer
             src="https://cloud.umami.is/script.js"
             data-website-id={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId}
-          ></script>
+          />
         </head>
         <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
           <ThemeProviders>
@@ -125,6 +125,7 @@ export default async function RootLayout({ children }: Props) {
           </ThemeProviders>
         </body>
       </html>
+      <Script src="/scripts/umamiEvent.js" strategy="lazyOnload" id="umami-script" />
     </ClerkProvider>
   )
 }

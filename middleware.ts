@@ -23,7 +23,7 @@ const applyCsp = (req: NextRequest) => {
     script-src 'self' 'unsafe-inline' https://real-moth-1.clerk.accounts.dev https://challenges.cloudflare.com https://cusdis.com/js/cusdis.es.js https://cusdis.com/js/iframe.umd.js https: http: ${
       process.env.NODE_ENV === 'production' ? '' : `'unsafe-eval'`
     };
-    connect-src 'self' https://cusdis.com https://real-moth-1.clerk.accounts.dev;
+    connect-src 'self' https://cusdis.com https://real-moth-1.clerk.accounts.dev https://api-gateway.umami.dev/api/send;
     img-src 'self' https://img.clerk.com data: https:;
     worker-src 'self' blob:;
     style-src 'self' https://fonts.googleapis.com https://cusdis.com 'unsafe-inline';
