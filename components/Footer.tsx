@@ -1,6 +1,7 @@
 import Link from './Link'
 import siteMetadata from '@/data/siteMetadata'
 import SocialIcon from '@/components/social-icons'
+import CookieSettings from './CookieSettings'
 
 export default function Footer() {
   return (
@@ -33,6 +34,10 @@ export default function Footer() {
           <div>{` • `}</div>
           <div className="hover:text-primary-500 dark:hover:text-primary-400">
             <Link href="/conduct">Code of Conduct</Link>
+          </div>
+          <div>{` • `}</div>
+          <div className="hover:text-primary-500 dark:hover:text-primary-400">
+            <CookieSettings />
           </div>
         </div>
       </div>

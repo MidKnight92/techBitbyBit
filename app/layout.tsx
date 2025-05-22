@@ -122,7 +122,6 @@ export default async function RootLayout({ children }: Props) {
           </ThemeProviders>
         </body>
       </html>
-      <ConditionalScripts />
     </ClerkProvider>
   )
 }
