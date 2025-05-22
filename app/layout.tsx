@@ -11,11 +11,11 @@ import siteMetadata from '@/data/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
-import { cookies, headers } from 'next/headers'
-import { NonceProvider } from './nonce-providers'
 import { Props } from 'types/childrenOnly'
 import React from 'react'
-import { dark, neobrutalism } from '@clerk/themes'
+import { neobrutalism } from '@clerk/themes'
+import ScrollBottom from '@/components/ScrollBottom'
+import ScrollTop from '@/components/ScrollTop'
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -116,7 +116,9 @@ export default async function RootLayout({ children }: Props) {
             <SectionContainer>
               <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                 <Header />
+                <ScrollBottom />
                 <main className="mb-auto">{children}</main>
+                <ScrollTop />
               </SearchProvider>
               <Footer />
             </SectionContainer>

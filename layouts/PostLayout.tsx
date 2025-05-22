@@ -6,7 +6,7 @@ import SectionContainer from '@/components/SectionContainer'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import ScrollComment from '@/components/ScrollComment'
 import LikeButtonVercelKV from '@/components/LikeButtonVercelKV'
 import Comments from '@/components/Comments'
 import { Props } from 'types/childrenOnly'
@@ -31,7 +31,7 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
   const basePath = path.split('/')[0]
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
+      <ScrollComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <header className="pt-6 xl:pb-6">

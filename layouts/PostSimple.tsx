@@ -3,7 +3,6 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Contribute, Terms, Privacy, Conduct } from 'contentlayer/generated'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { Props } from 'types/childrenOnly'
 
 interface LayoutProps extends Props {
@@ -15,7 +14,6 @@ export default function PostLayout({ content, children }: LayoutProps) {
 
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
       <article>
         <div>
           <header>

@@ -3,16 +3,13 @@ import Image from '@/components/Image'
 import Bleed from 'pliny/ui/Bleed'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { About } from 'contentlayer/generated'
-import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
-import siteMetadata from '@/data/siteMetadata'
-import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import img from '../public/static/images/tbbb-banner-patreon.png'
+import { Props } from 'types/childrenOnly'
 
-interface LayoutProps {
+interface LayoutProps extends Props {
   content: CoreContent<About>
-  children: ReactNode
 }
 
 export default function PostMinimal({ content, children }: LayoutProps) {
@@ -20,7 +17,6 @@ export default function PostMinimal({ content, children }: LayoutProps) {
   const displayImage = images && images.length > 0 ? images[0] : img
   return (
     <SectionContainer>
-      <ScrollTopAndComment />
       <article>
         <div>
           <div className="space-y-1 pb-10 text-center dark:border-gray-700">
