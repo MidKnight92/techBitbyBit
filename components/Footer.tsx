@@ -13,23 +13,22 @@ export default function Footer() {
           {/* <SocialIcon kind="podcast" href={siteMetadata.podcast} size={6} /> */}
         </div>
         <div className="sm:track-tighter mb-2 flex space-x-1 text-xs text-gray-500 md:space-x-2 dark:text-gray-400">
-          <div className="hover:text-primary-500 dark:hover:text-primary-400">
-            <Link href={'/authors/Stephanie_Viveros'}>{siteMetadata.author}</Link>
-          </div>
-          <div>{` • `}</div>
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
           <Link href="/" className="hover:text-primary-500 dark:hover:text-primary-400">
             {siteMetadata.title}
           </Link>
+          <div>{` • `}</div>
+          <p>All rights reserved.</p>
         </div>
+        <div></div>
         <div className="sm:track-tighter mb-4 flex items-center space-x-0.5 text-xs text-gray-500 md:space-x-2 dark:text-gray-400">
           <div className="hover:text-primary-500 dark:hover:text-primary-400">
             <Link href="/privacy-policy">Privacy Policy</Link>
           </div>
           <div>{` • `}</div>
           <div className="hover:text-primary-500 dark:hover:text-primary-400">
-            <Link href="/terms">Terms of Service</Link>
+            <Link href="/terms">Terms of Use</Link>
           </div>
           <div>{` • `}</div>
           <div className="hover:text-primary-500 dark:hover:text-primary-400">
