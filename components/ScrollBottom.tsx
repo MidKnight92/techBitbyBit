@@ -6,7 +6,7 @@ const ScrollBottom = () => {
 
   useEffect(() => {
     const handleWindowScroll = () => {
-      if (window.scrollY < 70) setShow(true)
+      if (window.scrollY > 10) setShow(true)
       else setShow(false)
     }
 

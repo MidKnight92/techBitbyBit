@@ -8,25 +8,24 @@ export default function CookieSettings() {
   return (
     <>
       <button onClick={() => setIsVisible(true)}>Cookie Settings</button>
-      {isVisible && (
-        <CookieWrapper
-          acceptButton="All Cookies"
-          declineButton="Only necessary"
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-        >
-          <div className="flex justify-between">
-            <h2>Change Your Cookie Settings 🍪</h2>
-            <button onClick={() => setIsVisible(false)}>
-              <p className="!important text-md text-primary-500 hover:text-primary-400 p-1">X</p>
-            </button>
-          </div>
-          <p className="font-sans">
-            You're about to modify your current cookie settings. Make your new selections below and
-            confirm your choices to update your preferences for this site.
-          </p>
-        </CookieWrapper>
-      )}
+      <CookieWrapper
+        acceptButton="All Cookies"
+        declineButton="Only necessary"
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+      >
+        <div className="flex justify-between">
+          <h2>Change Your Cookie Settings 🍪</h2>
+          <button onClick={() => setIsVisible(false)}>
+            <p className="!important text-md text-primary-500 hover:text-primary-400 p-1">X</p>
+          </button>
+        </div>
+        <p className="font-sans">
+          You’re about to update your cookie preferences. Select your new choices below and confirm
+          to save your updated settings. Please note: you’ll need to refresh the page for changes to
+          take effect.
+        </p>
+      </CookieWrapper>
     </>
   )
 }

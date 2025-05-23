@@ -2,8 +2,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { Props } from 'types/childrenOnly'
 import ConditionalScripts from './ConditionalScripts'
-
-export const cookieKey = 'cookie-consent-tbbb'
+import { CookieSettings, CookieValues, useConsent } from 'app/cookie-provider'
 
 interface CookieProps extends Props {
   acceptButton?: string
@@ -19,9 +18,11 @@ export default function CookieWrapper({
   isVisible,
   setIsVisible,
 }: CookieProps) {
-  const handleClick = (value: 'true' | 'false'): void => {
+  const { setConsent } = useConsent()
+
+  const handleClick = (value: CookieSettings): void => {
     setIsVisible(false)
-    localStorage.setItem(cookieKey, value)
+    setConsent(value)
   }
   return (
     <>
@@ -32,7 +33,7 @@ export default function CookieWrapper({
             <div>
               <button
                 className="text-primary-500 hover:text-primary-400 mr-4 px-4"
-                onClick={() => handleClick('true')}
+                onClick={() => handleClick(CookieValues.ACCEPTED)}
               >
                 {acceptButton}
               </button>
@@ -40,7 +41,7 @@ export default function CookieWrapper({
             <div>
               <button
                 className="text-primary-500 hover:text-primary-400 ml-4 px-4"
-                onClick={() => handleClick('false')}
+                onClick={() => handleClick(CookieValues.DENIED)}
               >
                 {declineButton}
               </button>

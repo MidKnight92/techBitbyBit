@@ -17,6 +17,7 @@ import ScrollBottom from '@/components/ScrollBottom'
 import ScrollTop from '@/components/ScrollTop'
 import CookieBanner from '@/components/CookieBanner'
 import ConditionalScripts from '@/components/ConditionalScripts'
+import { CookieProvider } from './cookie-provider'
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -110,14 +111,16 @@ export default async function RootLayout({ children }: Props) {
           <ThemeProviders>
             <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
             <SectionContainer>
-              <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                <Header />
-                <ScrollBottom />
-                <main className="mb-auto">{children}</main>
-                <ScrollTop />
-                <CookieBanner />
-              </SearchProvider>
-              <Footer />
+              <CookieProvider>
+                <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                  <Header />
+                  <ScrollBottom />
+                  <main className="mb-auto">{children}</main>
+                  <ScrollTop />
+                  <CookieBanner />
+                </SearchProvider>
+                <Footer />
+              </CookieProvider>
             </SectionContainer>
           </ThemeProviders>
         </body>

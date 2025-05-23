@@ -1,18 +1,14 @@
 'use client'
-import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import Script from 'next/script'
+import { CookieValues, useConsent } from 'app/cookie-provider'
 
-const KEY = 'cookie-consent-tbbb'
 export default function ConditionalScripts() {
-  const [isConsentGiven, setIsConsentGiven] = useState(false)
+  const { isConsentGiven } = useConsent()
 
-  useEffect(() => {
-    setIsConsentGiven(localStorage.getItem(KEY) === 'true')
-  }, [])
   return (
     <>
-      {isConsentGiven && (
+      {isConsentGiven === CookieValues.ACCEPTED && (
         <>
           <Script
             defer
