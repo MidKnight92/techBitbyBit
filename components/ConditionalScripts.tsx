@@ -6,18 +6,17 @@ import { CookieValues, useConsent } from 'app/cookie-provider'
 export default function ConditionalScripts() {
   const { isConsentGiven } = useConsent()
 
+  if (isConsentGiven !== CookieValues.ACCEPTED) {
+    return null
+  }
   return (
     <>
-      {isConsentGiven === CookieValues.ACCEPTED && (
-        <>
-          <Script
-            defer
-            src="https://cloud.umami.is/script.js"
-            data-website-id={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId}
-          />
-          <Script src="/scripts/umamiEvent.js" strategy="lazyOnload" id="umami-script" />
-        </>
-      )}
+      <Script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id={siteMetadata.analytics?.umamiAnalytics?.umamiWebsiteId}
+      />
+      <Script src="/scripts/umamiEvent.js" strategy="lazyOnload" id="umami-script" />
     </>
   )
 }

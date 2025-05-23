@@ -1,7 +1,6 @@
 'use client'
 import { Dispatch, SetStateAction } from 'react'
 import { Props } from 'types/childrenOnly'
-import ConditionalScripts from './ConditionalScripts'
 import { CookieSettings, CookieValues, useConsent } from 'app/cookie-provider'
 
 interface CookieProps extends Props {
@@ -49,7 +48,6 @@ export default function CookieWrapper({
           </div>
         </div>
       )}
-      <ConditionalScripts />
     </>
   )
 }

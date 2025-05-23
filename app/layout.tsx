@@ -120,6 +120,7 @@ export default async function RootLayout({ children }: Props) {
                   <CookieBanner />
                 </SearchProvider>
                 <Footer />
+                <ConditionalScripts />
               </CookieProvider>
             </SectionContainer>
           </ThemeProviders>
