@@ -3,8 +3,6 @@ import { ReactCusdis } from 'react-cusdis'
 import { useTheme } from 'next-themes'
 import { useState, useEffect } from 'react'
 
-
-
 type Theme = 'dark' | 'light' | 'auto' | undefined
 
 export default function Comments({

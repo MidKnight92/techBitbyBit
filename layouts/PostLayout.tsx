@@ -7,7 +7,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollComment from '@/components/ScrollComment'
-import LikeButtonVercelKV from '@/components/LikeButtonVercelKV'
+import LikeButton from '@/components/LikeButton'
 import Comments from '@/components/Comments'
 import { Props } from 'types/childrenOnly'
 import AuthGate from '@/components/AuthGate'
@@ -85,7 +85,7 @@ export default function PostLayout({ authorDetails, content, next, prev, childre
                 className="pt-6 pb-6 text-center text-sm text-gray-700 dark:text-gray-300"
               >
                 <AuthGate>
-                  <LikeButtonVercelKV slug={slug} />
+                  <LikeButton slug={slug} />
                   <p className="my-6 text-sm text-gray-600">
                     Be kind, stay constructive, and follow our{' '}
                     <Link href="/conduct" className="text-blue-600 underline hover:text-blue-800">

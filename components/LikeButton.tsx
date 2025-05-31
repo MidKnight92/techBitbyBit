@@ -7,8 +7,9 @@ enum LikeAction {
   Decrement = 'decrement',
 }
 
-export default function LikeButtonVercelKV({ slug }) {
+export default function LikeButton({ slug }) {
   const [likes, setLikes] = useState(0)
+  const [limit, setLimit] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [isProcessing, setIsProcessing] = useState(false)
@@ -50,6 +51,7 @@ export default function LikeButtonVercelKV({ slug }) {
     setIsProcessing(true)
     const nextLiked = !isLiked
     setIsLiked(nextLiked)
+    setLimit((currentLimit) => currentLimit + 1)
     localStorage.setItem(storageKey, `${nextLiked}`)
     setLikes((prevLikes) => Math.max(0, prevLikes + (action === LikeAction.Increment ? 1 : -1)))
     try {
@@ -80,7 +82,7 @@ export default function LikeButtonVercelKV({ slug }) {
         aria-pressed={isLiked}
         aria-label={isLiked ? 'Unlike this post' : 'Like this post'}
         onClick={() => handleLike(isLiked ? LikeAction.Decrement : LikeAction.Increment)}
-        disabled={isProcessing}
+        disabled={isProcessing || limit === 3}
       >
         {isLiked ? '💙 Liked' : '🩵 Like'}
       </button>

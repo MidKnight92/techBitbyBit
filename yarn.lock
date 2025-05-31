@@ -4243,7 +4243,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@upstash/redis@npm:^1.34.9":
+"@upstash/core-analytics@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@upstash/core-analytics@npm:0.0.10"
+  dependencies:
+    "@upstash/redis": ^1.28.3
+  checksum: 5b435a5e67666a6ecb19e59ab73f314124634fdadb66390f8b2d6f7e20cac461262e5b81d113d77a5d093d8d11b2cfe3ecd5c573cde77505557f8bbf0f8b1e27
+  languageName: node
+  linkType: hard
+
+"@upstash/ratelimit@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@upstash/ratelimit@npm:2.0.5"
+  dependencies:
+    "@upstash/core-analytics": ^0.0.10
+  peerDependencies:
+    "@upstash/redis": ^1.34.3
+  checksum: 0be03b7fb2531b86990aefad2e3251778e208de9b94a7440e18380060290fe9da33bb9773c08adce660b7ea08904329bf2eb78c76813938bad4c0adc85eacd54
+  languageName: node
+  linkType: hard
+
+"@upstash/redis@npm:^1.28.3, @upstash/redis@npm:^1.34.9":
   version: 1.34.9
   resolution: "@upstash/redis@npm:1.34.9"
   dependencies:
@@ -12158,6 +12178,7 @@ __metadata:
     "@types/react": ^19.0.8
     "@typescript-eslint/eslint-plugin": ^8.12.0
     "@typescript-eslint/parser": ^8.12.0
+    "@upstash/ratelimit": ^2.0.5
     "@upstash/redis": ^1.34.9
     body-scroll-lock: ^4.0.0-beta.0
     contentlayer2: 0.5.5
