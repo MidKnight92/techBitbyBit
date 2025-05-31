@@ -2,12 +2,14 @@ import { slug } from 'github-slugger'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayoutWithTags'
-import { allBits } from 'contentlayer/generated'
+import { allBits, Bits } from 'contentlayer/generated'
 import tagData from 'app/tag-data.json'
 import { genPageMetadata } from 'app/seo'
 import { Metadata } from 'next'
+import { filterByDate } from 'lib/filterPosts'
 
 const POSTS_PER_PAGE = 5
+const filteredBits: Bits[] = filterByDate(allBits)
 
 export async function generateMetadata(props: {
   params: Promise<{ tag: string }>
@@ -39,7 +41,9 @@ export default async function TagPage(props: { params: Promise<{ tag: string }> 
   const tag = decodeURI(params.tag)
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   const filteredPosts = allCoreContent(
-    sortPosts(allBits.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
+    sortPosts(
+      filteredBits.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag))
+    )
   )
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
   const initialDisplayPosts = filteredPosts.slice(0, POSTS_PER_PAGE)

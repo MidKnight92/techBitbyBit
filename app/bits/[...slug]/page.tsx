@@ -10,19 +10,24 @@ import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
 import { headers } from 'next/headers'
 import Script from 'next/script'
+import { filterByDate } from 'lib/filterPosts'
+import { PRODUCTION, REVALIDATE_INTERVAL_DEV, REVALIDATE_INTERVAL_PROD } from 'lib/constants'
 
+export const revalidate = process.env.NODE_ENV === PRODUCTION ? REVALIDATE_INTERVAL_PROD : REVALIDATE_INTERVAL_DEV
 const defaultLayout = 'PostLayout'
 // In future add additional post layout below
 const layouts = {
   PostLayout,
 }
 
+const filteredBits: Bits[] = filterByDate(allBits)
+
 export async function generateMetadata(props: {
   params: Promise<{ slug: string[] }>
 }): Promise<Metadata | undefined> {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
-  const post = allBits.find((p) => p.slug === slug)
+  const post = filteredBits.find((p) => p.slug === slug)
   const authorList = post!.authors
   const authorDetails = authorList!.map((author) => {
     const authorResults = allAuthors.find((a) => a.name === author)
@@ -63,14 +68,15 @@ export async function generateMetadata(props: {
 }
 
 export const generateStaticParams = async () => {
-  return allBits.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
+  // console.log(allBits)
+  return filteredBits.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBits))
+  const sortedCoreContents = allCoreContent(sortPosts(filteredBits))
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
   if (postIndex === -1) {
     return notFound()
@@ -78,7 +84,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = allBits.find((p) => p.slug === slug) as Bits
+  const post = filteredBits.find((p) => p.slug === slug) as Bits
   const authorList = post?.authors
   const authorDetails = authorList!.map((author) => {
     const authorResults = allAuthors.find((p) => p.name === author)

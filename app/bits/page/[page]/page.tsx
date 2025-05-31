@@ -1,12 +1,15 @@
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import { allBits } from 'contentlayer/generated'
+import { allBits, Bits } from 'contentlayer/generated'
 import { notFound } from 'next/navigation'
+import { filterByDate } from 'lib/filterPosts'
 
 const POSTS_PER_PAGE = 5
+// export const revalidate = process.env.NODE_ENV === PRODUCTION ? REVALIDATE_INTERVAL_PROD : REVALIDATE_INTERVAL_DEV
+const filteredBits: Bits[] = filterByDate(allBits)
 
 export const generateStaticParams = async () => {
-  const totalPages = Math.ceil(allBits.length / POSTS_PER_PAGE)
+  const totalPages = Math.ceil(filteredBits.length / POSTS_PER_PAGE)
   const paths = Array.from({ length: totalPages }, (_, i) => ({ page: (i + 1).toString() }))
 
   return paths
