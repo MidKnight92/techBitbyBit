@@ -16,8 +16,9 @@ import { neobrutalism } from '@clerk/themes'
 import ScrollBottom from '@/components/ScrollBottom'
 import ScrollTop from '@/components/ScrollTop'
 import CookieBanner from '@/components/CookieBanner'
-import ConditionalScripts from '@/components/ConditionalScripts'
+import UmaniHeadScript from '@/components/UmaniHeadScript'
 import { CookieProvider } from './cookie-provider'
+import UmaniScriptAfterHtml from '@/components/UmaniScriptAfterHtml'
 
 const workSans = Work_Sans({
   subsets: ['latin'],
@@ -73,45 +74,46 @@ export default async function RootLayout({ children }: Props) {
   const basePath = process.env.BASE_PATH || ''
 
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: [neobrutalism],
-        variables: {
-          colorPrimary: 'blue',
-          fontWeight: { medium: 500 },
-          fontFamilyButtons: 'Orbitron',
-          fontFamily: 'Orbitron',
-        },
-        captcha: {
-          theme: 'light',
-          size: 'compact',
-        },
-      }}
-      dynamic
-    >
-      <html
-        lang={siteMetadata.language}
-        className={`${orbitron.variable} ${workSans.variable} scroll-smooth`}
-        suppressHydrationWarning
+    <CookieProvider>
+      <ClerkProvider
+        appearance={{
+          baseTheme: [neobrutalism],
+          variables: {
+            colorPrimary: 'blue',
+            fontWeight: { medium: 500 },
+            fontFamilyButtons: 'Orbitron',
+            fontFamily: 'Orbitron',
+          },
+          captcha: {
+            theme: 'light',
+            size: 'compact',
+          },
+        }}
+        dynamic
       >
-        <head>
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href={`${basePath}/static/favicons/favicon-16x16.png`}
-          />
-          <link rel="manifest" href={`${basePath}/site.webmanifest`} />
-          <meta name="msapplication-TileColor" content="#111111" />
-          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
-          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
-          <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-        </head>
-        <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
-          <ThemeProviders>
-            <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-            <SectionContainer>
-              <CookieProvider>
+        <html
+          lang={siteMetadata.language}
+          className={`${orbitron.variable} ${workSans.variable} scroll-smooth`}
+          suppressHydrationWarning
+        >
+          <head>
+            <link
+              rel="icon"
+              type="image/png"
+              sizes="16x16"
+              href={`${basePath}/static/favicons/favicon-16x16.png`}
+            />
+            <link rel="manifest" href={`${basePath}/site.webmanifest`} />
+            <meta name="msapplication-TileColor" content="#111111" />
+            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb" />
+            <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111" />
+            <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
+            <UmaniHeadScript />
+          </head>
+          <body className="bg-[#f9fafb] pl-[calc(100vw-100%)] text-black antialiased dark:bg-[#111111] dark:text-white">
+            <ThemeProviders>
+              <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+              <SectionContainer>
                 <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                   <Header />
                   <ScrollBottom />
@@ -120,12 +122,12 @@ export default async function RootLayout({ children }: Props) {
                   <CookieBanner />
                 </SearchProvider>
                 <Footer />
-                <ConditionalScripts />
-              </CookieProvider>
-            </SectionContainer>
-          </ThemeProviders>
-        </body>
-      </html>
-    </ClerkProvider>
+              </SectionContainer>
+            </ThemeProviders>
+          </body>
+        </html>
+        <UmaniScriptAfterHtml />
+      </ClerkProvider>
+    </CookieProvider>
   )
 }
