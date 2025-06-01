@@ -4,7 +4,6 @@ import { genPageMetadata } from 'app/seo'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { filterByDate } from 'lib/filterPosts'
 
-
 const POSTS_PER_PAGE = 5
 
 export const revalidate = 604800

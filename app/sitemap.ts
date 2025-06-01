@@ -3,7 +3,6 @@ import { allBits, Bits } from 'contentlayer/generated'
 import siteMetadata from '@/data/siteMetadata'
 import { filterByDate } from 'lib/filterPosts'
 
-
 export const revalidate = 604800
 
 const filteredBits: Bits[] = filterByDate(allBits)
