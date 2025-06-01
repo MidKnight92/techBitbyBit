@@ -11,9 +11,8 @@ import { notFound } from 'next/navigation'
 import { headers } from 'next/headers'
 import Script from 'next/script'
 import { filterByDate } from 'lib/filterPosts'
-import { PRODUCTION, REVALIDATE_INTERVAL_DEV, REVALIDATE_INTERVAL_PROD } from 'lib/constants'
 
-export const revalidate = process.env.NODE_ENV === PRODUCTION ? REVALIDATE_INTERVAL_PROD : REVALIDATE_INTERVAL_DEV
+export const revalidate = 604800
 const defaultLayout = 'PostLayout'
 // In future add additional post layout below
 const layouts = {

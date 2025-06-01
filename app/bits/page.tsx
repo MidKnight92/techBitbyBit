@@ -3,11 +3,12 @@ import { allBits, Bits } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/seo'
 import ListLayout from '@/layouts/ListLayoutWithTags'
 import { filterByDate } from 'lib/filterPosts'
-import { PRODUCTION, REVALIDATE_INTERVAL_PROD, REVALIDATE_INTERVAL_DEV } from 'lib/constants'
+
 
 const POSTS_PER_PAGE = 5
 
-export const revalidate = process.env.NODE_ENV === PRODUCTION ? REVALIDATE_INTERVAL_PROD : REVALIDATE_INTERVAL_DEV
+export const revalidate = 604800
+
 export const metadata = genPageMetadata({ title: 'Bits' })
 
 const filteredBits: Bits[] = filterByDate(allBits)

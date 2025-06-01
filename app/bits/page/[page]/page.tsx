@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { filterByDate } from 'lib/filterPosts'
 
 const POSTS_PER_PAGE = 5
-// export const revalidate = process.env.NODE_ENV === PRODUCTION ? REVALIDATE_INTERVAL_PROD : REVALIDATE_INTERVAL_DEV
+// export const revalidate = REVALIDATE_INTERVAL
 const filteredBits: Bits[] = filterByDate(allBits)
 
 export const generateStaticParams = async () => {
